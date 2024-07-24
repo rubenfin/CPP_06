@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/03 15:28:46 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/24 15:11:25 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/24 16:32:33 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,46 +65,50 @@ void ScalarConverter::convert(const std::string &literal)
 {
 	if (checkIfChar(literal))
 	{
+		char c = static_cast<char>(literal.at(0));
+		std::cout << "found char" << std::endl;
         std::cout << "char: " << literal << std::endl;
-        std::cout << "int: " << static_cast<int>(literal.at(0)) << std::endl;
-        std::cout << "float: " << static_cast<float>(literal.at(0)) << ".0f" << std::endl;
-        std::cout << "double: " << static_cast<double>(literal.at(0)) << ".0" << std::endl;
+        std::cout << "int: " << static_cast<int>(c) << std::endl;
+        std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
     }
 	else if (checkIfInt(literal))
 	{
-        if ((std::stoi(literal) > 31 && std::stoi(literal) < 127))
-            std::cout << "char: " << static_cast<char>(std::stoi(literal))<< std::endl;
+		int i = std::stoi(literal);
+		std::cout << "found int" << std::endl;
+        if ((i > 31 && i < 127))
+            std::cout << "char: " << static_cast<char>(i)<< std::endl;
         else
 		    std::cout << "char: Non displayable" << std::endl;
         std::cout << "int: " << literal << std::endl;
-        std::cout << "float: " << static_cast<float>(std::stof(literal)) << ".0f" << std::endl;
-        std::cout << "double: " << static_cast<double>(std::stod(literal)) << ".0" << std::endl;
+        std::cout << "float: " << static_cast<float>(i) << ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(i) << ".0" << std::endl;
     }
     else if (checkIfFloat(literal))
 	{
-        if ((std::stoi(literal) > 31 && std::stoi(literal) < 127))
-            std::cout << "char: " << static_cast<char>(std::stoi(literal))<< std::endl;
+		float f = std::stof(literal);
+		std::cout << "found float" << std::endl;
+        if ((f > 31 && f < 127))
+            std::cout << "char: " << static_cast<char>(f)<< std::endl;
         else
 		    std::cout << "char: Non displayable" << std::endl;
-        std::cout << "int: " << static_cast<int>(std::stoi(literal)) << std::endl;
+        std::cout << "int: " << static_cast<int>(f) << std::endl;
         std::cout << "float: " << literal << std::endl;
-        if (!std::to_string(static_cast<double>(std::stof(literal))).find('.'))
-            std::cout << "double: " << static_cast<double>(std::stod(literal)) << std::endl;
-        else
-            std::cout << "double: " << static_cast<double>(std::stod(literal)) << ".0" << std::endl;
+        std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
     }
 	else if (checkIfDouble(literal))
 	{
-        if ((std::stoi(literal) > 31 && std::stoi(literal) < 127))
-            std::cout << "char: " << static_cast<char>(std::stoi(literal))<< std::endl;
-        else
-		    std::cout << "char: Non displayable" << std::endl;
-        std::cout << "int: " << static_cast<int>(std::stoi(literal)) << std::endl;
-        if (!std::to_string(static_cast<float>(std::stof(literal))).find('.'))
-            std::cout << "float: " << static_cast<float>(std::stof(literal)) << "f" << std::endl;
-        else 
-            std::cout << "float: " << static_cast<float>(std::stof(literal)) << ".0f" << std::endl;
-        std::cout << "double: " << literal << std::endl;
+		// std::cout << "found double" << std::endl;
+        // if ((f > 31 && std::stoi(literal) < 127))
+        //     std::cout << "char: " << static_cast<char>(std::stoi(literal))<< std::endl;
+        // else
+		//     std::cout << "char: Non displayable" << std::endl;
+        // std::cout << "int: " << static_cast<int>(std::stoi(literal)) << std::endl;
+        // if (!std::to_string(static_cast<float>(std::stof(literal))).find('.'))
+        //     std::cout << "float: " << static_cast<float>(std::stof(literal)) << ".0f" << std::endl;
+        // else 
+        //     std::cout << "float: " << static_cast<float>(std::stof(literal)) << "f" << std::endl;
+        // std::cout << "double: " << literal << std::endl;
     }
 	else
 	{
