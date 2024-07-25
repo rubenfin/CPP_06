@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/03 15:28:46 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/24 16:32:33 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/25 11:17:09 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,64 +57,99 @@ static bool	checkIfInt(const std::string &literal)
 
 static bool	checkIfChar(const std::string &literal)
 {
-	return (literal.size() == 1 && ((literal.at(0) > 31
-				&& literal.at(0) < 127) && !std::isdigit(literal.at(0))));
+	return (literal.size() == 1 && ((literal.at(0) > 31 && literal.at(0) < 127)
+			&& !std::isdigit(literal.at(0))));
+}
+
+static bool	checkIfPseudo(const std::string &literal)
+{
+	return ((literal == "inf") || (literal == "-inf") || (literal == "+inf")
+		|| (literal == "-inff") || (literal == "+inff") || (literal == "nan")
+		|| (literal == "nanf"));
+}
+
+static void	printPseudo(const std::string &literal)
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	if (literal == "nanf" || literal == "nan")
+	{
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+	}
+	else if (literal == "inf" || literal == "+inf" || literal == "+inff")
+	{
+		std::cout << "float: +inff" << std::endl;
+		std::cout << "double: +inf" << std::endl;
+	}
+	else if (literal == "-inf" || literal == "-inff")
+	{
+		std::cout << "float: -inff" << std::endl;
+		std::cout << "double: -inf" << std::endl;
+	}
+}
+
+static void	printNoDataType(void)
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: nanf" << std::endl;
+	std::cout << "double: nan" << std::endl;
 }
 
 void ScalarConverter::convert(const std::string &literal)
 {
-	if (checkIfChar(literal))
+	if (checkIfPseudo(literal))
+	{
+		printPseudo(literal);
+	}
+	else if (checkIfChar(literal))
 	{
 		char c = static_cast<char>(literal.at(0));
 		std::cout << "found char" << std::endl;
-        std::cout << "char: " << literal << std::endl;
-        std::cout << "int: " << static_cast<int>(c) << std::endl;
-        std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
-        std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
-    }
+		std::cout << "char: '" << c << "'" << std::endl;
+		std::cout << "int: " << static_cast<int>(c) << std::endl;
+		std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
+		std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
+	}
 	else if (checkIfInt(literal))
 	{
 		int i = std::stoi(literal);
 		std::cout << "found int" << std::endl;
-        if ((i > 31 && i < 127))
-            std::cout << "char: " << static_cast<char>(i)<< std::endl;
-        else
-		    std::cout << "char: Non displayable" << std::endl;
-        std::cout << "int: " << literal << std::endl;
-        std::cout << "float: " << static_cast<float>(i) << ".0f" << std::endl;
-        std::cout << "double: " << static_cast<double>(i) << ".0" << std::endl;
-    }
-    else if (checkIfFloat(literal))
+		if ((i > 31 && i < 127))
+			std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
+		else
+			std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: " << i << std::endl;
+		std::cout << "float: " << static_cast<float>(i) << ".0f" << std::endl;
+		std::cout << "double: " << static_cast<double>(i) << ".0" << std::endl;
+	}
+	else if (checkIfFloat(literal))
 	{
 		float f = std::stof(literal);
 		std::cout << "found float" << std::endl;
-        if ((f > 31 && f < 127))
-            std::cout << "char: " << static_cast<char>(f)<< std::endl;
-        else
-		    std::cout << "char: Non displayable" << std::endl;
-        std::cout << "int: " << static_cast<int>(f) << std::endl;
-        std::cout << "float: " << literal << std::endl;
-        std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
-    }
+		if ((f > 31 && f < 127))
+			std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
+		else
+			std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: " << static_cast<int>(f) << std::endl;
+		std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
+	}
 	else if (checkIfDouble(literal))
 	{
-		// std::cout << "found double" << std::endl;
-        // if ((f > 31 && std::stoi(literal) < 127))
-        //     std::cout << "char: " << static_cast<char>(std::stoi(literal))<< std::endl;
-        // else
-		//     std::cout << "char: Non displayable" << std::endl;
-        // std::cout << "int: " << static_cast<int>(std::stoi(literal)) << std::endl;
-        // if (!std::to_string(static_cast<float>(std::stof(literal))).find('.'))
-        //     std::cout << "float: " << static_cast<float>(std::stof(literal)) << ".0f" << std::endl;
-        // else 
-        //     std::cout << "float: " << static_cast<float>(std::stof(literal)) << "f" << std::endl;
-        // std::cout << "double: " << literal << std::endl;
-    }
+		std::cout << "found double" << std::endl;
+		double d = std::stod(literal);
+		if ((d > 31 && d < 127))
+			std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
+		else
+			std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: " << static_cast<int>(d) << std::endl;
+		std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+		std::cout << "double: " << d << std::endl;
+	}
 	else
 	{
-		std::cout << "char: impossible" << std::endl;
-		std::cout << "int: impossible" << std::endl;
-		std::cout << "float: nanf" << std::endl;
-		std::cout << "double: nan" << std::endl;
+		printNoDataType();
 	}
 }
