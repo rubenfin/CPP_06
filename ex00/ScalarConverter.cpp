@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/03 15:28:46 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 11:17:09 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/25 12:16:50 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,67 @@ static void	printPseudo(const std::string &literal)
 	}
 }
 
+static void printDouble(const std::string &literal)
+{
+	double d = std::stod(literal);
+	long long l = std::stoll(literal);
+	
+	if ((d > 31 && d < 127))
+		std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+	if (std::stoll(literal) > INT_MAX || std::stoll(literal) < INT_MIN)
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(d) << std::endl;
+	if (l > std::numeric_limits<float>::max()
+	|| l < std::numeric_limits<float>::min() )
+		std::cout << "float: impossible" << std::endl;
+	else
+		std::cout << "float: " << static_cast<float>(d) << ".0f" << std::endl;
+	std::cout << "double: " << d << std::endl;
+}
+
+static void	printFloat(const std::string &literal)
+{
+	float	f;
+	long long l = std::stoll(literal);
+	f = std::stof(literal);
+	if ((f > 31 && f < 127))
+		std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+	if (l > INT_MAX || l < INT_MIN)
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(f) << std::endl;
+	std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
+}
+
+static void	printInt(const std::string &literal)
+{
+	int	i;
+
+	i = std::stoi(literal);
+	if ((i > 31 && i < 127))
+		std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+	std::cout << "int: " << i << std::endl;
+	std::cout << "float: " << static_cast<float>(i) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<double>(i) << ".0" << std::endl;
+}
+
+static void printChar(const std::string &literal)
+{
+	char c = static_cast<char>(literal.at(0));
+	std::cout << "char: '" << c << "'" << std::endl;
+	std::cout << "int: " << static_cast<int>(c) << std::endl;
+	std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
+	std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
+}
+
 static void	printNoDataType(void)
 {
 	std::cout << "char: impossible" << std::endl;
@@ -99,56 +160,22 @@ static void	printNoDataType(void)
 
 void ScalarConverter::convert(const std::string &literal)
 {
+	try
+	{
 	if (checkIfPseudo(literal))
-	{
 		printPseudo(literal);
-	}
 	else if (checkIfChar(literal))
-	{
-		char c = static_cast<char>(literal.at(0));
-		std::cout << "found char" << std::endl;
-		std::cout << "char: '" << c << "'" << std::endl;
-		std::cout << "int: " << static_cast<int>(c) << std::endl;
-		std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
-		std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
-	}
+		printChar(literal);
 	else if (checkIfInt(literal))
-	{
-		int i = std::stoi(literal);
-		std::cout << "found int" << std::endl;
-		if ((i > 31 && i < 127))
-			std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
-		else
-			std::cout << "char: Non displayable" << std::endl;
-		std::cout << "int: " << i << std::endl;
-		std::cout << "float: " << static_cast<float>(i) << ".0f" << std::endl;
-		std::cout << "double: " << static_cast<double>(i) << ".0" << std::endl;
-	}
+		printInt(literal);
 	else if (checkIfFloat(literal))
-	{
-		float f = std::stof(literal);
-		std::cout << "found float" << std::endl;
-		if ((f > 31 && f < 127))
-			std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
-		else
-			std::cout << "char: Non displayable" << std::endl;
-		std::cout << "int: " << static_cast<int>(f) << std::endl;
-		std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
-	}
+		printFloat(literal);
 	else if (checkIfDouble(literal))
-	{
-		std::cout << "found double" << std::endl;
-		double d = std::stod(literal);
-		if ((d > 31 && d < 127))
-			std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
-		else
-			std::cout << "char: Non displayable" << std::endl;
-		std::cout << "int: " << static_cast<int>(d) << std::endl;
-		std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
-		std::cout << "double: " << d << std::endl;
-	}
+		printDouble(literal);
 	else
+		printNoDataType();
+	}
+	catch(const std::exception &e)
 	{
 		printNoDataType();
 	}

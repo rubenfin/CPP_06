@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ScalarConverter.hpp                                :+:    :+:            */
+/*   Data.cpp                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/06/03 15:28:32 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 11:56:15 by rfinneru      ########   odam.nl         */
+/*   Created: 2024/07/25 16:05:58 by rfinneru      #+#    #+#                 */
+/*   Updated: 2024/07/25 16:38:45 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "Data.hpp"
 
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <limits.h>
-#include <limits>
-
-class ScalarConverter
+Data::Data()
 {
-  private:
-	ScalarConverter();
-  public:
-	static void convert(const std::string &literal);
-};
+    
+}
+
+Data::~Data()
+{
+    
+}
+
+void Data::printDataValues()
+{
+    std::cout << "Pointer to data struct: " CYAN << this << RESET << std::endl;
+    std::cout << "Integer: " << this->integer << std::endl;
+    std::cout << "String: " << this->str << std::endl;
+}

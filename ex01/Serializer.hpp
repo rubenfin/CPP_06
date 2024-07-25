@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ScalarConverter.hpp                                :+:    :+:            */
+/*   Serializer.hpp                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/06/03 15:28:32 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 11:56:15 by rfinneru      ########   odam.nl         */
+/*   Created: 2024/07/25 12:24:26 by rfinneru      #+#    #+#                 */
+/*   Updated: 2024/07/25 16:31:42 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include "Colors.hpp"
+#include "Data.hpp"
+#include <cstdint>
 #include <iostream>
-#include <string>
-#include <iomanip>
-#include <limits.h>
-#include <limits>
 
-class ScalarConverter
+class Data;
+
+class Serializer
 {
-  private:
-	ScalarConverter();
-  public:
-	static void convert(const std::string &literal);
+private:
+    Serializer();
+    ~Serializer();
+public:
+    Serializer(const Serializer &other) = delete;
+    Serializer &operator=(const Serializer& other) = delete;
+    static uintptr_t serialize(Data *ptr);
+    static Data * deserialize(uintptr_t raw);
 };

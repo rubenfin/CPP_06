@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ScalarConverter.hpp                                :+:    :+:            */
+/*   Data.hpp                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/06/03 15:28:32 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 11:56:15 by rfinneru      ########   odam.nl         */
+/*   Created: 2024/07/25 13:30:18 by rfinneru      #+#    #+#                 */
+/*   Updated: 2024/07/25 16:08:32 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iostream>
+#include "Serializer.hpp"
 #include <string>
-#include <iomanip>
-#include <limits.h>
-#include <limits>
+#include <array>
 
-class ScalarConverter
+class Data
 {
-  private:
-	ScalarConverter();
-  public:
-	static void convert(const std::string &literal);
+private:
+    static const int integer = 5;
+    const std::string str = "Hello World";
+
+public:
+    Data();
+    ~Data();
+    void printDataValues();
 };
