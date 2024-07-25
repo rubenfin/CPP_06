@@ -6,13 +6,13 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/25 16:05:58 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 16:38:45 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/25 16:41:58 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Data.hpp"
 
-Data::Data()
+Data::Data(int i, std::string s) : integer(i), str(s)
 {
     
 }

@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/25 13:30:18 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 16:08:32 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/25 16:42:16 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 class Data
 {
 private:
-    static const int integer = 5;
-    const std::string str = "Hello World";
+    int integer;
+    std::string str;
 
 public:
-    Data();
+    Data(int i, std::string s);
     ~Data();
     void printDataValues();
 };
