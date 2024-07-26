@@ -6,8 +6,17 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/25 16:52:27 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 16:52:39 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/26 12:13:16 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "A.hpp"
+
+
+A::A()
+{
+}
+
+A::~A()
+{
+}

@@ -6,11 +6,18 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/25 16:53:50 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 16:54:11 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/26 12:36:51 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "Base.hpp"
+
+class C : public Base
+{
+public:
+    C();
+    ~C();
+};
 

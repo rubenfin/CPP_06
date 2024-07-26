@@ -6,8 +6,16 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/25 16:53:40 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/25 16:53:48 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/26 12:13:23 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "C.hpp"
+
+C::C()
+{
+}
+
+C::~C()
+{
+}
