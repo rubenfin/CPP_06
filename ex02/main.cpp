@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/26 11:41:34 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/26 16:24:43 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/12/13 10:57:50 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	identify(Base &p)
 	try
 	{
 		(void)dynamic_cast<A &>(p);
-		std::cout << YELLOW "Class is A" RESET << std::endl;
+		std::cout << BLUE "Class is A" RESET << std::endl;
 		return;
 	}
 	catch (const std::bad_cast&) {}
@@ -47,7 +47,7 @@ void	identify(Base &p)
 	try
 	{
 		(void)dynamic_cast<B &>(p);
-		std::cout << YELLOW "Class is B" RESET << std::endl;
+		std::cout << BLUE "Class is B" RESET << std::endl;
 		return;
 	}
 	catch (const std::bad_cast&) {}
@@ -55,7 +55,7 @@ void	identify(Base &p)
 	try
 	{
 		(void)dynamic_cast<C &>(p);
-		std::cout << YELLOW "Class is C" RESET << std::endl;
+		std::cout << BLUE "Class is C" RESET << std::endl;
 		return;
 	}
 	catch (const std::bad_cast&) {}
@@ -71,13 +71,12 @@ Base	*generate(void)
 	std::mt19937 rng(std::random_device{}());
 	std::uniform_int_distribution<> dist(0, 2);
 	random = dist(rng);
-	std::cout << "Random class generated! " << random << std::endl;
 	if (!random)
-		rdm = reinterpret_cast<Base *>(new A);
+		rdm = new A;
 	else if (random == 1)
-		rdm = reinterpret_cast<Base *>(new B);
+		rdm = new B;
 	else
-		rdm = reinterpret_cast<Base *>(new C);
+		rdm = new C;
 	return (rdm);
 }
 

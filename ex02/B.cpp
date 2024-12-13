@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/25 16:53:13 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/26 12:13:20 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/12/12 19:33:17 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 B::B()
 {
+    std::cout << "Random generated class is B" << std::endl;
 }
 
 B::~B()

@@ -1,6 +1,6 @@
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 -fsanitize=address
-# CFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 
+CPP = c++
+# CPPFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 -fsanitize=address
+CPPFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 
 SRCS = $(wildcard *.cpp) 
 OBJS = $(patsubst %.cpp,obj/%.o,$(SRCS))
 
@@ -9,11 +9,11 @@ TARGET = Scalar
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+	@$(CPP) $(CPPFLAGS) $(OBJS) -o $(TARGET)
 	@echo "$(GREEN)Compiled Scalar!$(DEFAULT)"
 
 obj/%.o: %.cpp | obj
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
 
 obj:
 	@mkdir -p obj
